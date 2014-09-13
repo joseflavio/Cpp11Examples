@@ -1,3 +1,17 @@
+# Eclipse files
+.project
+.cproject
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+obj
+
+# Binaries default generated
+*.out
+
 # Compiled Object files
 *.slo
 *.lo
