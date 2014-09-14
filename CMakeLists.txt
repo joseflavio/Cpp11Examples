@@ -7,5 +7,6 @@ INCLUDE_DIRECTORIES(Cpp11Examples/include)
 FILE(GLOB MyCSources Cpp11Examples/src/*.cpp)
 ADD_EXECUTABLE(Cpp11ExamplesMain.out ${MyCSources})
 
-set(EXECUTABLE_OUTPUT_PATH build/)
+SET(EXECUTABLE_OUTPUT_PATH build/)
 
+LIST( APPEND CMAKE_CXX_FLAGS "-std=c++11")
