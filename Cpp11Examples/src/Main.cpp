@@ -7,9 +7,9 @@ int main() {
 	std::cout << std::endl << std::make_pair("p", 2) << std::endl;
 
 	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distribution(1,6);
+	std::uniform_int_distribution<int> distribution(1, 6);
 
-	for (int i=0; i<100; ++i) {
+	for (int i = 0; i < 100; ++i) {
 		auto dice_roll = distribution(generator);
 		// std::cout << std::to_string(dice_roll) << std::endl;
 	}
@@ -18,6 +18,8 @@ int main() {
 	std::cout << "a=" << a << std::endl;
 
 	std::shared_ptr<MyInteger> b { new MyInteger(6) };
+
+	NullPtrExample::ThrowIfNull(b);
 
 	//*a = 5;
 

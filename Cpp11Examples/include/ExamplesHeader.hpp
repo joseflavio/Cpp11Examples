@@ -3,7 +3,6 @@
 
 #include <stdafx.h>
 
-
 template<typename A, typename B>
 std::ostream& operator<< (std::ostream& o, const std::pair<A,B>& p) {
 	return o << "std::pair["<< p.first << ", " << p.second << "]";
@@ -11,10 +10,27 @@ std::ostream& operator<< (std::ostream& o, const std::pair<A,B>& p) {
 
 template<typename T>
 std::ostream& operator<< (std::ostream& o, const std::shared_ptr<T>& i) {
-	if(i == nullptr) {
-		return o << "std::shared_ptr[count=" << i.use_count() << ",  nullptr]";
+	if (i == nullptr) {
+		return o << "std::shared_ptr[count=" << i.use_count() << ", nullptr]";
 	}
 	return o << "std::shared_ptr[count=" << i.use_count() << ", addr="<< static_cast<void*>(&*i) << ", value=" << (*i) << "]";
 }
+
+namespace NullPtrExample {
+	template<typename T>
+	static void ThrowIfNull(T p) {
+		if (p == nullptr) {
+			throw std::exception();
+		}
+	}
+}// namespace NullPtrExample
+
+namespace StronglyTypedEnumsExample {
+	enum class ExchangePolicy
+	{
+		NoExchange, ExchangePerBookedTrip
+	};
+}// namespace StronglyTypedEnumsExample
+
 
 #endif /* EXAMPLESHEADER_HPP_ */

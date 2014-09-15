@@ -1,6 +1,7 @@
 # Eclipse files
 .project
 .cproject
+.settings/org.eclipse.cdt.codan.core.prefs
 
 # CMake files
 CMakeFiles/
@@ -41,3 +42,4 @@ obj
 *.exe
 *.out
 *.app
+

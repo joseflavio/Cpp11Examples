@@ -3,3 +3,4 @@ addr
 endl
 cout
 nullptr
+namespace
