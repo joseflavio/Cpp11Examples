@@ -9,4 +9,4 @@ ADD_EXECUTABLE(Cpp11ExamplesMain.out ${MyCSources})
 
 SET(EXECUTABLE_OUTPUT_PATH build/)
 
-LIST( APPEND CMAKE_CXX_FLAGS "-std=c++11")
+LIST( APPEND CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -Werror -O3")
