@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <random>
+#include <sstream>
 #include <string> // For std::to_string
 #include <memory> // For Smart Pointers
 

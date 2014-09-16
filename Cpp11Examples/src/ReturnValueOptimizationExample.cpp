@@ -7,13 +7,27 @@ namespace ReturnValueOptimizationExampleTypes {
 class RVO {
 public:
     std::string _str;
+    // Regular constructor
     RVO(const std::string iStr): _str(iStr) {
     }
-    RVO(const RVO& i): _str(i._str){
-        std::cout << "A copy of RVO._str=" << _str << " was made.\n";
+    // Copy constructor
+    RVO(const RVO& i): _str(i._str) {
+        std::cout << "RVO._str=" << _str << " was copy constructed.\n";
     }
+    // Copy assignment operator
+    RVO& operator=(const RVO&) {
+    	std::cout << "RVO._str=" << _str << " was copy assigned.\n";
+    	return *this;
+    }
+    // Move constructor
     RVO(RVO&& i) : _str(std::move(i._str)) {
-        std::cout << "The RVO._str=" << _str << " was moved.\n";
+        std::cout << "RVO._str=" << _str << " was moved constructed.\n";
+    }
+    // Move assignment operator
+    RVO& operator=(RVO&& i) {
+    	_str = std::move(i._str);
+    	std::cout << "RVO._str=" << _str << " was moved assigned.\n";
+        return *this;
     }
 };
 
