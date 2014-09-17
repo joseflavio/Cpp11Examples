@@ -13,3 +13,7 @@ Cpp11Examples
 - To use clang++ in Ubuntu:
     sudo update-alternatives --config c++
 
+References
+=============
+
+- http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html

@@ -5,6 +5,36 @@
 
 #include <MyInteger.hpp>
 
+enum class ExchangePolicy {
+    NoExchange, ExchangePerBookedTrip
+};
+
+enum class Color {
+    Red, Blue
+};
+
+bool StronglyTypedEnumTest() {
+    ExchangePolicy a { ExchangePolicy::ExchangePerBookedTrip };
+    // Valid
+    if ( a == ExchangePolicy::NoExchange ) {
+        return true;
+    }
+    // Error
+    //    if ( a == Color::Red ) {
+    //        return true;
+    //    }
+    //    // Error
+    //    if ( a == 0 ) {
+    //        return true;
+    //    }
+    return false;
+}
+
+void PerformanceTest() {
+    // auto start =  std::chrono:: high_resolution_clock::now();
+
+}
+
 int main() {
 
     std::cout << std::endl << std::make_pair("p", 2) << std::endl;
@@ -23,6 +53,9 @@ int main() {
     std::shared_ptr<MyInteger> b { new MyInteger(6) };
 
     NullPtrExample::ThrowIfNull(b);
+
+    std::array<int, 4> firstIntArray { { 1, 2, 3, 4 } };
+    std::cout << ContainerToString(firstIntArray) << std::endl;
 
     //*a = 5;
 

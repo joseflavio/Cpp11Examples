@@ -3,13 +3,21 @@
 
 #include <stdafx.h>
 
+#define LOG_METHOD(VAR) std::cout << "METHOD - " << #VAR;
+
 template<typename T>
-std::string ContainerToString(const T& p) {
-	std::stringstream ss;
-	for (const auto& current:p) {
-		ss << current;
-	}
-	return ss.str();
+std::string ContainerToString(const T& p, const std::string separator = ", ") {
+    std::stringstream ss;
+    bool first = true;
+    for (const auto & current : p) {
+        if (first) {
+            first = false;
+        } else {
+            ss << separator;
+        }
+        ss << current;
+    }
+    return ss.str();
 }
 
 template<typename A, typename B>
