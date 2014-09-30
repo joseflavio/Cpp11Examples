@@ -5,3 +5,5 @@ cout
 nullptr
 namespace
 chrono
+foo
+baz

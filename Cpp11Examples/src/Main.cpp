@@ -13,20 +13,48 @@ enum class Color {
     Red, Blue
 };
 
+void nullptrTypeExample() {
+#ifdef SHOW_ERRORS
+    const int p = 0;
+    if (p == nullptr) {
+        throw std::exception();
+    }
+#endif
+}
+
+void arraysExamples() {
+    {
+        std::array<std::string, 3> a { { "foo", "baz", "bar" } };
+        std::sort(a.begin(), a.end());
+        for (const auto& v : a) {
+            std::cout << v << ' ';
+        }
+    }
+    {
+        std::array<int, 5> a { { 1, 2, 3, 4, 5 } };
+        std::reverse(a.begin(), a.end());
+        for (const auto& v : a) {
+            std::cout << v << ' ';
+        }
+    }
+}
+
 bool StronglyTypedEnumTest() {
     ExchangePolicy a { ExchangePolicy::ExchangePerBookedTrip };
     // Valid
-    if ( a == ExchangePolicy::NoExchange ) {
+    if (a == ExchangePolicy::NoExchange) {
+        return true;
+    }
+#ifdef SHOW_ERRORS
+    // Error
+    if ( a == Color::Red ) {
         return true;
     }
     // Error
-    //    if ( a == Color::Red ) {
-    //        return true;
-    //    }
-    //    // Error
-    //    if ( a == 0 ) {
-    //        return true;
-    //    }
+    if ( a == 0 ) {
+        return true;
+    }
+#endif
     return false;
 }
 
@@ -36,6 +64,7 @@ void PerformanceTest() {
 }
 
 int main() {
+    arraysExamples();
 
     std::cout << std::endl << std::make_pair("p", 2) << std::endl;
 
