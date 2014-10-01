@@ -19,6 +19,7 @@ public:
     	std::cout << "RVO._str=" << _str << " was copy assigned.\n";
     	return *this;
     }
+
     // Move constructor
     RVO(RVO&& i) : _str(std::move(i._str)) {
         std::cout << "RVO._str=" << _str << " was moved constructed.\n";

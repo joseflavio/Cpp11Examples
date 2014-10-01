@@ -3,12 +3,13 @@
 
 #include <stdafx.h>
 
-#define LOG_METHOD(VAR) std::cout << "METHOD - " << #VAR;
+#define INVOKE_METHOD(VAR) std::cout << "EXECUTING " << #VAR << std::endl; VAR;
 
 template<typename T>
 std::string ContainerToString(const T& p, const std::string separator = ", ") {
     std::stringstream ss;
     bool first = true;
+
     for (const auto & current : p) {
         if (first) {
             first = false;
@@ -17,6 +18,7 @@ std::string ContainerToString(const T& p, const std::string separator = ", ") {
         }
         ss << current;
     }
+
     return ss.str();
 }
 
