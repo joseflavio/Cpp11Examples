@@ -7,6 +7,7 @@ namespace ReturnValueOptimizationExampleTypes {
 class RVO {
 public:
     std::string _str;
+
     // Regular constructor
     RVO(const std::string iStr): _str(iStr) {
     }
@@ -16,8 +17,8 @@ public:
     }
     // Copy assignment operator
     RVO& operator=(const RVO&) {
-    	std::cout << "RVO._str=" << _str << " was copy assigned.\n";
-    	return *this;
+        std::cout << "RVO._str=" << _str << " was copy assigned.\n";
+        return *this;
     }
 
     // Move constructor
@@ -26,8 +27,8 @@ public:
     }
     // Move assignment operator
     RVO& operator=(RVO&& i) {
-    	_str = std::move(i._str);
-    	std::cout << "RVO._str=" << _str << " was moved assigned.\n";
+        _str = std::move(i._str);
+        std::cout << "RVO._str=" << _str << " was moved assigned.\n";
         return *this;
     }
 };
@@ -56,12 +57,11 @@ RVO Working2(bool c = true) {
 
 void ReturnValueOptimizationExample::Execute() {
     using namespace ReturnValueOptimizationExampleTypes;
-    std::cout << "ReturnValueOptimizationExample" << std::endl << "===" << std::endl << std::endl;
-    std::cout << "- RVO Working:" << std::endl;
+    std::cout << "RVO Working:" << std::endl;
     std::cout << Working()._str << std::endl;
-    std::cout << "- RVO Not working:" << std::endl;
+    std::cout << "RVO Not working:" << std::endl;
     std::cout << NotWorking()._str << std::endl;
-    std::cout << "- RVO Working with move:" << std::endl;
+    std::cout << "RVO Working with move:" << std::endl;
     std::cout << Working2()._str << std::endl;
     std::cout << std::endl;
 }
