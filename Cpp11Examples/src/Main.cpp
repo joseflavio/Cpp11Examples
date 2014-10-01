@@ -6,7 +6,6 @@
 #include <MyInteger.hpp>
 #include <MyClass.hpp>
 
-
 enum class ExchangePolicy {
     NoExchange, ExchangePerBookedTrip
 };
@@ -97,7 +96,67 @@ void ToStringExample() {
     }
 }
 
+void OtherFeaturesExamples() {
+
+    std::vector<std::map<std::string, uint64_t>> v { { { "key1", 17 }, { "key2", 23 } } };
+
+    std::vector<std::map<std::string, uint64_t>>::const_iterator cit1 = v.cbegin();
+    const std::map<std::string, uint64_t>& m1 = (*cit1);
+
+    auto cit2 = v.cbegin();
+    auto& m2 = (*cit2);
+
+    // Error: m2.insert(std::make_pair("key3", 91 ));
+
+    std::cout << "m1=" << *m1.begin() << std::endl;
+    std::cout << "m2=" << *m2.begin() << std::endl;
+
+    std::cout << std::endl << std::make_pair("p", 2) << std::endl;
+
+    std::array<int, 4> firstIntArray { { 1, 2, 3, 4 } };
+    std::cout << ContainerToString(firstIntArray) << std::endl;
+
+    std::vector<std::shared_ptr<std::string>> right_angle_bracket;
+    std::cout << ContainerToString(right_angle_bracket) << std::endl;
+}
+
+using namespace std;
+
+pair<string, string::size_type> createEntry(const string& s) {
+    return {s, s.length()};
+}
+
+void InitializationSyntaxExample() {
+    string str1 { "test" };
+    int v1 { 4 };
+    map<string, string::size_type> map1 { { str1, v1 }, { "key1", 3 }, { "a", 1 } };
+    map1.insert(createEntry("modern"));
+    std::cout << ContainerToString(map1, ",\n") << std::endl;
+}
+
+void RangeBasedLoopExample() {
+    const std::vector<std::complex<double>> cvector { {2, 3}, {4, 5} };
+    {
+        std::complex<double> r1 { 1, 0 };
+        for (std::vector<std::complex<double>>::const_iterator cit = cvector.begin();
+                cit != cvector.end(); ++cit) {
+            const std::complex<double>& c = (*cit);
+            r1 *= c;
+        }
+        std::cout << "r1=" << r1 << std::endl;
+    }
+    {
+        std::complex<double> r2 { 1, 0 };
+        for (const auto& c : cvector) {
+            r2 *= c;
+        }
+        std::cout << "r2=" << r2 << std::endl;
+    }
+}
+
 int main() {
+
+    INVOKE_METHOD(OtherFeaturesExamples());
 
     INVOKE_METHOD(SmartPointersExample());
 
@@ -111,17 +170,9 @@ int main() {
 
     INVOKE_METHOD(PerformanceTest());
 
-    /*
-     * Other features
-     */
+    INVOKE_METHOD(InitializationSyntaxExample());
 
-    std::cout << std::endl << std::make_pair("p", 2) << std::endl;
-
-    std::array<int, 4> firstIntArray { { 1, 2, 3, 4 } };
-    std::cout << ContainerToString(firstIntArray) << std::endl;
-
-    std::vector<std::shared_ptr<std::string>> right_angle_bracket;
-    std::cout << ContainerToString(right_angle_bracket) << std::endl;
+    INVOKE_METHOD(RangeBasedLoopExample());
 
     return 0;
 

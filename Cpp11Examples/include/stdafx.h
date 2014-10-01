@@ -1,6 +1,12 @@
 #ifndef STDAFX_H_
 #define STDAFX_H_
 
+#include <vector>
+#include <set>
+#include <map>
+
+#include <complex>
+
 #include <algorithm> // std::sort
 #include <fstream> // To read/write file streams: std::ifstream
 #include <iostream>

@@ -6,17 +6,16 @@
 class MyClass {
 
 private:
-    int _int = 0;
-    std::string _string = "initialized";
+    int _int { 0 };
+    std::string _string { "initialized" };
 
 public:
-    MyClass() {
+    MyClass() = default;
+
+    MyClass(int i) : _int{i} {
     }
 
-    MyClass(int i) : _int(i) {
-    }
-
-    MyClass(int i, const std::string& s) : _int(i), _string(s) {
+    MyClass(int i, const std::string& s) : _int { i }, _string { s } {
     }
 
     std::string str() const {
@@ -28,7 +27,7 @@ public:
         std::cout << m1.str() << std::endl;
         MyClass m2 { 7 };
         std::cout << m2.str() << std::endl;
-        MyClass m3 { 7, "foo"};
+        MyClass m3 { 7, "foo" };
         std::cout << m3.str() << std::endl;
     }
 };

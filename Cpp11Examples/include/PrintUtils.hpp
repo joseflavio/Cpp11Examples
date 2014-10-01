@@ -3,7 +3,12 @@
 
 #include <stdafx.h>
 
-#define INVOKE_METHOD(VAR) std::cout << "EXECUTING " << #VAR << std::endl; VAR;
+#define INVOKE_METHOD(VAR) std::cout << "EXECUTING " << #VAR << std::endl; VAR; std::cout << std::endl;
+
+template<typename A, typename B>
+std::ostream& operator<<(std::ostream& o, const std::pair<A, B>& p) {
+    return o << "std::pair[" << p.first << ", " << p.second << "]";
+}
 
 template<typename T>
 std::string ContainerToString(const T& p, const std::string separator = ", ") {
@@ -20,11 +25,6 @@ std::string ContainerToString(const T& p, const std::string separator = ", ") {
     }
 
     return ss.str();
-}
-
-template<typename A, typename B>
-std::ostream& operator<<(std::ostream& o, const std::pair<A, B>& p) {
-    return o << "std::pair[" << p.first << ", " << p.second << "]";
 }
 
 template<typename T>
