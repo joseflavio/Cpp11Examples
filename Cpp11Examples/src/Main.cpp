@@ -1,5 +1,6 @@
 #include <stdafx.h>
 
+#include <Timer.hpp>
 #include <PrintUtils.hpp>
 #include <ExamplesHeader.hpp>
 
@@ -62,10 +63,35 @@ bool StronglyTypedEnumTest() {
 }
 
 void PerformanceTest() {
-    time_t start = time(NULL);
-    // sleep(3);
-    time_t end = time(NULL);
-    std::cout << "elapsed: " << (end - start) << std::endl;
+
+    std::random_device rd;
+    std::default_random_engine generator { rd() };
+    std::uniform_int_distribution<uint64_t> distribution;
+
+
+    Timer t0;
+    std::vector<std::set<uint64_t>> v;
+    for(size_t i = 0; i < 50000; ++i) {
+        std::set<uint64_t> set;
+        for(size_t j = 0; j < 1200; ++j) {
+            auto random_number = distribution(generator);
+            set.insert(random_number);
+        }
+        v.push_back(set);
+    }
+    Timer t1;
+    std::cout << "(construction) t1 elapsed=" << Timer::Elapsed(t0,t1) << std::endl;
+
+    std::sort(v.begin(), v.end());
+    Timer t2;
+    std::cout << "(sort) t2 elapsed=" << Timer::Elapsed(t1,t2) << std::endl;
+
+
+    std::rotate(v.begin(), (v.begin() + (v.size()/2)), v.end());
+    Timer t3;
+    std::cout << "(rotate) t3 elapsed=" << Timer::Elapsed(t2,t3) << std::endl;
+
+    std::cout << "total elapsed= " << Timer::Elapsed(t0,t3) << std::endl;
 
 }
 

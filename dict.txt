@@ -9,3 +9,5 @@ foo
 baz
 ola
 ifstream
+tt
+cpu

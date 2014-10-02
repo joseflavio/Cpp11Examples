@@ -1,6 +1,8 @@
 #ifndef STDAFX_H_
 #define STDAFX_H_
 
+#include <time.h>
+
 #include <vector>
 #include <set>
 #include <map>
