@@ -3,7 +3,12 @@
 
 #include <stdafx.h>
 
-#define INVOKE_METHOD(VAR) std::cout << "EXECUTING " << #VAR << std::endl; VAR; std::cout << std::endl;
+#define INVOKE_METHOD(VAR) {\
+    std::cout << "EXECUTING " << #VAR << std::endl;\
+    Timer t0;\
+    VAR;\
+    Timer t1;\
+    std::cout<<std::endl<<"FINISHED EXECUTING - elapsed = "<<Timer::Elapsed(t0,t1)<<std::endl<<std::endl; }
 
 template<typename A, typename B>
 std::ostream& operator<<(std::ostream& o, const std::pair<A, B>& p) {

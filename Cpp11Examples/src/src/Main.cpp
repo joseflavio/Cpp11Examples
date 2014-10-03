@@ -6,6 +6,7 @@
 
 #include <MyInteger.hpp>
 #include <MyClass.hpp>
+#include <Rot13Comparison.hpp>
 
 enum class ExchangePolicy {
     NoExchange, ExchangePerBookedTrip
@@ -15,7 +16,7 @@ enum class Color {
     Red, Blue
 };
 
-void nullptrTypeExample() {
+void NullptrTypeExample() {
 #ifdef SHOW_ERRORS
     const int p = 0;
     if (p == nullptr) {
@@ -148,7 +149,7 @@ void OtherFeaturesExamples() {
 
 using namespace std;
 
-pair<string, string::size_type> createEntry(const string& s) {
+pair<string, string::size_type> CreateMapEntry(const string& s) {
     return {s, s.length()};
 }
 
@@ -156,7 +157,7 @@ void InitializationSyntaxExample() {
     string str1 { "test" };
     int v1 { 4 };
     map<string, string::size_type> map1 { { str1, v1 }, { "key1", 3 }, { "a", 1 } };
-    map1.insert(createEntry("modern"));
+    map1.insert(CreateMapEntry("modern"));
     std::cout << ContainerToString(map1, ",\n") << std::endl;
 }
 
@@ -200,47 +201,9 @@ int main() {
 
     INVOKE_METHOD(RangeBasedLoopExample());
 
+    Rot13ExampleMain(0, nullptr);
+
     return 0;
 
-}
-
-using namespace std;
-
-char rot13(const char c) {
-    if (c >= 'a' && c <= 'z') {
-        return (c - 'a' + 13) % 26 + 'a';
-    } else if (c >= 'A' && c <= 'Z') {
-        return (c - 'A' + 13) % 26 + 'A';
-    }
-    return c;
-}
-
-string &convertLine(string &s) {
-    for (auto &c : s) {
-        c = rot13(c);
-    }
-    return s;
-}
-
-void readLines(istream &in, ostream &out) {
-    string s;
-    while (getline(in, s)) {
-        out << convertLine(s) << '\n';
-    }
-}
-
-int main2(int argc, char *argv[]) {
-    if (argc == 1) {
-        readLines(cin, cout);
-    } else {
-        for (int arg = 1; arg < argc; ++arg) {
-            ifstream fs { argv[arg] };
-            if (!fs) {
-                return EXIT_FAILURE;
-            }
-            readLines(fs, cout);
-        }
-    }
-    return EXIT_SUCCESS;
 }
 
