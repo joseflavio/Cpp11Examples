@@ -3,6 +3,9 @@
 .cproject
 .settings/org.eclipse.cdt.codan.core.prefs
 
+# Core files
+core
+
 # CMake files
 CMakeFiles/
 build/
