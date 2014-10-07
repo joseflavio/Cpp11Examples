@@ -3,6 +3,4 @@
 
 #include <stdafx.h>
 
-int Rot13ExampleMain(int argc, char *argv[]);
-
 #endif /* ROT13COMPARISON_HPP_ */

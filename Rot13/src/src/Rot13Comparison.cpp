@@ -1,6 +1,7 @@
 #include <Rot13Comparison.hpp>
 
-using namespace std;
+using std::cout;
+using std::string;
 
 char rot13(const char c) {
     if (c >= 'a' && c <= 'z') {
@@ -18,23 +19,23 @@ string &convertLine(string &s) {
     return s;
 }
 
-void readLines(istream &in, ostream &out) {
+void readLines(std::istream &in, std::ostream &out) {
     string s;
     while (getline(in, s)) {
         out << convertLine(s) << '\n';
     }
 }
 
-int Rot13ExampleMain(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
     if (argc == 1) {
-        readLines(cin, cout);
+        readLines(std::cin, std::cout);
     } else {
         for (int arg = 1; arg < argc; ++arg) {
-            ifstream fs { argv[arg] };
+            std::ifstream fs { argv[arg] };
             if (!fs) {
                 return EXIT_FAILURE;
             }
-            readLines(fs, cout);
+            readLines(fs, std::cout);
         }
     }
     return EXIT_SUCCESS;

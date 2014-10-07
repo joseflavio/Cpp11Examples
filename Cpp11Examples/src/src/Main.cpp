@@ -6,7 +6,9 @@
 
 #include <MyInteger.hpp>
 #include <MyClass.hpp>
-#include <Rot13Comparison.hpp>
+
+using std::cout;
+using std::string;
 
 enum class ExchangePolicy {
     NoExchange, ExchangePerBookedTrip
@@ -27,20 +29,20 @@ void NullptrTypeExample() {
 
 void ArraysExamples() {
     {
-        std::array<std::string, 3> a { { "foo", "baz", "bar" } };
+        std::array<string, 3> a { { "foo", "baz", "bar" } };
         std::sort(a.begin(), a.end());
         for (const auto& v : a) {
-            std::cout << v << ' ';
+            cout << v << ' ';
         }
-        std::cout << std::endl;
+        cout << "\n";
     }
     {
         std::array<int, 5> a { { 1, 2, 3, 4, 5 } };
         std::reverse(a.begin(), a.end());
         for (const auto& v : a) {
-            std::cout << v << ' ';
+            cout << v << ' ';
         }
-        std::cout << std::endl;
+        cout << "\n";
     }
 }
 
@@ -63,61 +65,20 @@ bool StronglyTypedEnumTest() {
     return false;
 }
 
-void PerformanceTest() {
-
-    static const size_t MAX_I = 50000;
-    static const size_t MAX_J = 2000;
-    static const size_t ELEMENT_SIZE = sizeof(uint64_t) + 40; // 20 bytes of container overhead
-    std::cout << "Expected memory needed: " << ( ELEMENT_SIZE * MAX_I * MAX_J ) / (1024 * 1024) << " MB" << std::endl;
-
-    std::random_device rd;
-    std::default_random_engine generator { rd() };
-    std::uniform_int_distribution<uint64_t> distribution;
-
-    Timer t1;
-    {
-        std::vector<std::set<uint64_t>> v;
-        for(size_t i = 0; i < MAX_I; ++i) {
-            std::set<uint64_t> set;
-            for(size_t j = 0; j < MAX_J; ++j) {
-                auto random_number = distribution(generator);
-                set.insert(random_number);
-            }
-            v.push_back(set);
-        }
-        std::cout << "(construction) t1 elapsed = " << Timer::Elapsed(t1) << std::endl;
-
-        // std::cout << "sleeping..." << std::endl; sleep(10);
-
-        Timer t2;
-        std::sort(v.begin(), v.end());
-        std::cout << "(sort) t2 elapsed = " << Timer::Elapsed(t2) << std::endl;
-
-
-        Timer t3;
-        std::rotate(v.begin(), (v.begin() + (v.size()/2)), v.end());
-        std::cout << "(rotate) t3 elapsed = " << Timer::Elapsed(t3) << std::endl;
-
-        std::cout << "total elapsed = " << Timer::Elapsed(t1) << std::endl;
-    }
-    std::cout << "total elapsed = " << Timer::Elapsed(t1) << std::endl;
-
-}
-
 void SmartPointersExample() {
-    std::shared_ptr<int64_t> sp1 { new int64_t { 8 } };
+    std::shared_ptr<int64_t> sp1 = std::make_shared<int64_t>(8);
     if (sp1 == nullptr) {
         throw std::exception();
     }
-    std::cout << "sp1=" << sp1 << std::endl;
+    cout << "sp1=" << sp1 << "\n";
 
-    std::shared_ptr<MyInteger> sp2 { new MyInteger { 6 } };
+    std::shared_ptr<MyInteger> sp2 = std::make_shared<MyInteger>(6);
     if (sp2 == nullptr) {
         throw std::exception();
     }
-    std::cout << "sp2=" << sp2 << std::endl;
+    cout << "sp2=" << sp2 << "\n";
     sp2 = nullptr;
-    std::cout << "sp2=" << sp2 << std::endl;
+    cout << "sp2=" << sp2 << "\n";
 }
 
 void ToStringExample() {
@@ -126,33 +87,33 @@ void ToStringExample() {
     std::uniform_int_distribution<int8_t> distribution(1, 6);
     for (int i = 0; i < 5; ++i) {
         auto dice_roll = distribution(generator);
-        std::cout << "roll #" << i << ": ";
-        std::cout << std::to_string(dice_roll) << std::endl;
+        cout << "roll #" << i << ": ";
+        cout << std::to_string(dice_roll) << "\n";
     }
 }
 
 void OtherFeaturesExamples() {
 
-    std::vector<std::map<std::string, uint64_t>> v { { { "key1", 17 }, { "key2", 23 } } };
+    std::vector<std::map<string, uint64_t>> v { { { "key1", 17 }, { "key2", 23 } } };
 
-    std::vector<std::map<std::string, uint64_t>>::const_iterator cit1 = v.cbegin();
-    const std::map<std::string, uint64_t>& m1 = (*cit1);
+    std::vector<std::map<string, uint64_t>>::const_iterator cit1 = v.cbegin();
+    const std::map<string, uint64_t>& m1 = (*cit1);
 
     auto cit2 = v.cbegin();
     auto& m2 = (*cit2);
 
     // Error: m2.insert(std::make_pair("key3", 91 ));
 
-    std::cout << "m1=" << *m1.begin() << std::endl;
-    std::cout << "m2=" << *m2.begin() << std::endl;
+    cout << "m1=" << *m1.begin() << "\n";
+    cout << "m2=" << *m2.begin() << "\n";
 
-    std::cout << std::endl << std::make_pair("p", 2) << std::endl;
+    cout << "\n" << std::make_pair("p", 2) << "\n";
 
     std::array<int, 4> firstIntArray { { 1, 2, 3, 4 } };
-    std::cout << ContainerToString(firstIntArray) << std::endl;
+    cout << ContainerToString(firstIntArray) << "\n";
 
-    std::vector<std::shared_ptr<std::string>> right_angle_bracket;
-    std::cout << ContainerToString(right_angle_bracket) << std::endl;
+    std::vector<std::shared_ptr<string>> right_angle_bracket;
+    cout << ContainerToString(right_angle_bracket) << "\n";
 }
 
 using namespace std;
@@ -166,7 +127,7 @@ void InitializationSyntaxExample() {
     int v1 { 4 };
     map<string, string::size_type> map1 { { str1, v1 }, { "key1", 3 }, { "a", 1 } };
     map1.insert(CreateMapEntry("modern"));
-    std::cout << ContainerToString(map1, ",\n") << std::endl;
+    cout << ContainerToString(map1, ",\n") << "\n";
 }
 
 void RangeBasedLoopExample() {
@@ -178,14 +139,14 @@ void RangeBasedLoopExample() {
             const std::complex<double>& c = (*cit);
             r1 *= c;
         }
-        std::cout << "r1=" << r1 << std::endl;
+        cout << "r1=" << r1 << "\n";
     }
     {
         std::complex<double> r2 { 1, 0 };
         for (const auto& c : cvector) {
             r2 *= c;
         }
-        std::cout << "r2=" << r2 << std::endl;
+        cout << "r2=" << r2 << "\n";
     }
 }
 
@@ -203,13 +164,9 @@ int main() {
 
     INVOKE_METHOD(ReturnValueOptimizationExample::Execute());
 
-    INVOKE_METHOD(PerformanceTest());
-
     INVOKE_METHOD(InitializationSyntaxExample());
 
     INVOKE_METHOD(RangeBasedLoopExample());
-
-    // Rot13ExampleMain(0, nullptr);
 
     return 0;
 
