@@ -12,7 +12,7 @@ char rot13(const char c) {
     return c;
 }
 
-string &convertLine(string &s) {
+string& convertLine(string &s) {
     for (auto &c : s) {
         c = rot13(c);
     }
