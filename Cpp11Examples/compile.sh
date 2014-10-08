@@ -14,5 +14,5 @@ echo Compiling using Cpp11 and Clang 3.5.0
 echo done.
 
 # Need for runtime? To be checked
-# export LD_LIBRARY_PATH="~seidelde/local/gcc/4.9.1/lib64"
+echo 'export LD_LIBRARY_PATH="/remote/intdeliv/seidelde/local/gcc/4.9.1/lib64:${LD_LIBRARY_PATH}"'
 
