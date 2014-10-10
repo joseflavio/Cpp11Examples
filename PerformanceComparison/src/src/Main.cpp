@@ -32,14 +32,13 @@ public:
 
 void PerformanceTest() {
 
-    static const size_t MAX_I = 50000;
-    static const size_t MAX_J = 1500;
-    static const size_t ELEMENT_SIZE = sizeof(uint64_t) + 40; // 20 bytes of container overhead
-    std::cout << "Expected memory needed: "
-            << (ELEMENT_SIZE * MAX_I * MAX_J) / (1024 * 1024) << " MB\n";
+    static const size_t MAX_I = 5000;
+    static const size_t MAX_J = 2000;
+    static const size_t ENTRY_SIZE = sizeof(uint64_t) + 40; // 40 bytes of container overhead
+    static const size_t TOTAL_MEM = (ENTRY_SIZE * MAX_I * MAX_J) / (1024 * 1024);
+    std::cout << "Expected memory needed: " << TOTAL_MEM << " MB\n";
 
     MyRandom rnd;
-
     Timer t1;
     {
         std::vector<std::set<uint64_t> > v;

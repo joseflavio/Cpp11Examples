@@ -27,18 +27,28 @@ void readLines(std::istream &in, std::ostream &out) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc == 1) {
-        readLines(std::cin, std::cout);
-    } else {
-        for (int arg = 1; arg < argc; ++arg) {
-            std::ifstream fs { argv[arg] };
-            if (!fs) {
-                return EXIT_FAILURE;
-            }
-            readLines(fs, std::cout);
-        }
+    std::vector<string> list { "Foo", "Bar", "Tux" };
+    for (const auto& current : list) {
+        cout << current << "\n";
     }
-    return EXIT_SUCCESS;
+    try {
+        if (argc == 1) {
+            readLines(std::cin, std::cout);
+        } else {
+            for (int arg = 1; arg < argc; ++arg) {
+                std::ifstream fs { argv[arg] };
+                if (!fs) {
+                    return EXIT_FAILURE;
+                }
+                readLines(fs, std::cout);
+            }
+        }
+        return EXIT_SUCCESS;
+    }
+    catch (const std::bad_alloc& e) {
+        cout << e.what();
+        return EXIT_FAILURE;
+    }
 }
 
 

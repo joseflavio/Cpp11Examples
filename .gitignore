@@ -6,6 +6,9 @@
 # Core files
 core
 
+# Callgrind output
+callgrind.*
+
 # CMake files
 CMakeFiles/
 build/
