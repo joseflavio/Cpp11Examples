@@ -16,7 +16,7 @@ std::ostream& operator<<(std::ostream& o, const std::pair<A, B>& p) {
 }
 
 template<typename T>
-std::string ContainerToString(const T& p, const std::string separator = ", ") {
+static std::string ContainerToString(const T& p, const std::string separator = ", ") {
     std::stringstream ss;
     bool first = true;
 
